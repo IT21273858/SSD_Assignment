@@ -123,8 +123,8 @@ hr {
     <body>
         <div class="layout">
         <div class="content">
-            <img src=${company.logo} class="logo" />
-            <h1 class="name">${company.businessName ? company.businessName : company.name}</h1>
+            <img src=${company?.logo} class="logo" />
+            <h1 class="name">${company?.businessName ? company?.businessName : company?.name}</h1>
             
               <hr>
               <div>
@@ -140,9 +140,9 @@ hr {
               <p style="font-size: 14px; padding: 20px">#${id}</p>
               
               <div class="address">
-                  <h2>${company.businessName}</h2>
-                  <p>${company.phoneNumber}</p>
-                  <p>${company.website ? company?.website : ''}</p>
+                  <h2>${company?.businessName}</h2>
+                  <p>${company?.phoneNumber}</p>
+                  <p>${company?.website ? company?.website : ''}</p>
                   
               </div>
         </div>

@@ -24,6 +24,8 @@ export const signin = async (req, res)=> {
         console.log("Email ->",email);
 
         const existingUser = await User.findOne({ email })
+        console.log("Existing user",existingUser);
+        
         
         //get userprofile and append to login auth detail
         const userProfile = await ProfileModel.findOne({ userId: existingUser?._id })
