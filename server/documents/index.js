@@ -122,10 +122,10 @@ img {
 
       <div>
           <p class="title">From:</p>
-          <h4 style="font-size: 9px; line-height: 5px">${company.businessName ? company.businessName : company.name}</h4>
-          <p style="font-size: 9px; line-height: 5px">${company.email}</p>
-          <p style="font-size: 9px; line-height: 5px">${company.phoneNumber}</p>
-          <p style="font-size: 9px; line-height: 5px">${company.contactAddress}</p>
+          <h4 style="font-size: 9px; line-height: 5px">${company?.businessName ? company?.businessName : company?.name}</h4>
+          <p style="font-size: 9px; line-height: 5px">${company?.email}</p>
+          <p style="font-size: 9px; line-height: 5px">${company?.phoneNumber}</p>
+          <p style="font-size: 9px; line-height: 5px">${company?.contactAddress}</p>
       </div>
 
       <div style="margin-bottom: 100px; margin-top: 20px">
