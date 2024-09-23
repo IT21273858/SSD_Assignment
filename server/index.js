@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 import pdf from 'html-pdf';
+import helmet from 'helmet';  // Import helmet for security headers
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -13,7 +14,6 @@ const __dirname = dirname(__filename);
 import invoiceRoutes from './routes/invoices.js';
 import clientRoutes from './routes/clients.js';
 import userRoutes from './routes/userRoutes.js';
-
 import profile from './routes/profile.js';
 import pdfTemplate from './documents/index.js';
 import emailTemplate from './documents/email.js';
@@ -27,11 +27,24 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 // CORS configuration with restricted origins
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://another-trusted-site.com'], 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Specify allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Specify allowed headers
-  credentials: true  // Set to true if you need to send cookies or other credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  
+  allowedHeaders: ['Content-Type', 'Authorization'],  
+  credentials: true  
 };
 app.use(cors(corsOptions));
+
+// Disable 'X-Powered-By' header to prevent information leakage
+app.disable('x-powered-by');
+
+// Use helmet for security headers, including X-Content-Type-Options
+app.use(helmet());
+app.use(helmet.frameguard({ action: 'deny' }));  // This sets X-Frame-Options to DENY
+
+// Manually ensure X-Content-Type-Options is set in case of special needs
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
 
 app.use('/invoices', invoiceRoutes);
 app.use('/clients', clientRoutes);
