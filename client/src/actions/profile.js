@@ -69,6 +69,8 @@ export const createProfile = (profile, history) => async (dispatch) => {
 
 export const updateProfile = (id, form, openSnackbar) => async (dispatch) => {
   try {
+    console.log("Income to update profile");
+    
     const { data } = await api.updateProfile(id, form);
 
     dispatch({ type: UPDATE_PROFILE, payload: data });

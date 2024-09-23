@@ -54,6 +54,8 @@ const Settings = () => {
   
   const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log("Starting to edit profile..",e);
+    
       await dispatch(updateProfile(profiles?._id, form, openSnackbar));
       setSwitchEdit(0)
 

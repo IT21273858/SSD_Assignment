@@ -16,9 +16,13 @@ import ProfileModel from '../models/ProfileModel.js';
 
 
 export const signin = async (req, res)=> {
+    console.log("Income to signin");
+    
     const { email, password } = req.body //Coming from formData
 
     try {
+        console.log("Email ->",email);
+
         const existingUser = await User.findOne({ email })
         
         //get userprofile and append to login auth detail
@@ -37,6 +41,8 @@ export const signin = async (req, res)=> {
         res.status(200).json({ result: existingUser, userProfile, token })
 
     } catch (error) {
+        console.log("Error",error);
+        
         res.status(500).json({ message: "Something went wrong"})
     }
 }
@@ -47,6 +53,8 @@ export const signup = async (req, res)=> {
     const { email, password, confirmPassword, firstName, lastName, bio } = req.body
 
     try {
+        console.log("Email ->",email);
+        
         const existingUser = await User.findOne({ email })
         const userProfile = await ProfileModel.findOne({ userId: existingUser?._id })
 

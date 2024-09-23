@@ -148,7 +148,7 @@ SMTP_PASS =
 ```
 > goes to path "client/.env"
 ```
-REACT_APP_GOOGLE_CLIENT_ID = 
+REACT_APP_GOOGLE_CLIENT_ID = 400066029920-v6nsv0ic437qgjpjglirip710k23veg6.apps.googleusercontent.com
 REACT_APP_API = http://localhost:5000
 REACT_APP_URL = http://localhost
 ```
