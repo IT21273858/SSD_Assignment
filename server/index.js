@@ -70,7 +70,7 @@ app.post('/send-pdf', (req, res) => {
   const { email, company } = req.body;
   pdf.create(pdfTemplate(req.body), options).toFile('invoice.pdf', (err) => {
     transporter.sendMail({
-      from: `Accountill <hello@accountill.com>`, 
+      from: `Nodekidos <nool@nodekidos.com>`, 
       to: `${email}`, 
       replyTo: `${company?.email}`,
       subject: `Invoice from ${company?.businessName ? company?.businessName : company?.name}`, 
