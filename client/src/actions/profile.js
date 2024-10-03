@@ -27,9 +27,13 @@ export const getProfiles = () => async (dispatch) => {
 
 
 export const getProfilesByUser =(searchQuery) => async (dispatch) => {
+  
   try {
+    
     dispatch({ type: START_LOADING })
-    const { data: { data } } = await api.fetchProfilesByUser(searchQuery)
+    
+    const { data: {data } } = await api.fetchProfilesByUser(searchQuery)
+ 
     dispatch({ type: FETCH_PROFILE_BY_USER, payload: data });
  
     dispatch({ type: END_LOADING })

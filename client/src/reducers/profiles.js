@@ -17,7 +17,8 @@ const profilesReducer = (state = { isLoading: true, profiles: [] }, action) => {
     case FETCH_PROFILE_BY_USER:
       return {...state, profiles: action.payload }
     case FETCH_PROFILE:
-      // localStorage.setItem('userProfile', JSON.stringify({...action.payload}))
+      console.log("Profile fetched:", action.payload);
+       localStorage.setItem('userProfile', JSON.stringify({...action.payload}))
       return {...state, profile: action.payload }
     
     case CREATE_PROFILE:

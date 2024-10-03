@@ -6,6 +6,7 @@ import ProfileModel from '../models/ProfileModel.js';
 const router = express.Router();
 
 export const getProfiles = async (req, res) => { 
+  console.log("from server 1")
   try {
       const allProfiles = await ProfileModel.find().sort({ _id: -1 });
               
@@ -19,7 +20,7 @@ export const getProfile = async (req, res) => {
   const { id } = req.params;
 
   try {
-    console.log("Income to get profile");
+    console.log("Income to get profile -");
     
       const profile = await ProfileModel.findById(id);
       
@@ -69,21 +70,45 @@ export const createProfile = async (req, res) => {
 
 
 export const getProfilesByUser = async (req, res) => {
-  const { searchQuery } = req.query;
+  console.log("Incoming request to get profile by userId");
+  
+  const {  userId } = req.query;
+  var userdetails;
 
   try {
-    console.log("Income to get profile by user",searchQuery);
+    console.log("Fetching profile for userId:",  userId);
     
-      // const email = new RegExp(searchQuery, "i");
+    // Searching for a profile by the userId
+const profiler = await ProfileModel.find()
+.then((data) => {
+  console.log("Data is ", data);
+  data.filter((user)=>(user.userId==userId))
+  console.log("filter",data);
+  userdetails=data
+}).catch((error) => {
+  console.error("Error fetching profile:", error);
+});
 
-      const profile = await ProfileModel.findOne({ userId: searchQuery });
-      console.log("Profile data is...",profile);
-      
-      res.json({ data: profile });
+
+  
+
+    
+    if (!userdetails) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    console.log("Profile data found:", profiler);
+
+    // Return the profile data directly
+    return res.status(200).json({
+      data:userdetails[0]
+    });
   } catch (error) {    
-      res.status(404).json({ message: error.message });
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: error.message });
   }
 }
+
 
 
 

@@ -34,7 +34,7 @@ export const reset = (formData) => API.post('/users/reset', formData);
 export const fetchProfilesBySearch = (searchQuery) => API.get(`/profiles/search?searchQuery=${searchQuery.search || searchQuery.year || 'none'}`);
 export const fetchProfile = (id) => API.get(`/profiles/${id}`)
 export const fetchProfiles = () => API.get('/profiles');
-export const fetchProfilesByUser = (searchQuery) => API.get(`/profiles?searchQuery=${searchQuery.search}`)
+export const fetchProfilesByUser = ( userId) => API.get(`/profiles/byid?userId=${ userId.search}`);
 export const createProfile = (newProfile) => API.post('/profiles', newProfile);
 export const updateProfile = (id, updatedProfile) => API.patch(`/profiles/${id}`, updatedProfile);
 export const deleteProfile = (id) => API.delete(`/profiles/${id}`);
