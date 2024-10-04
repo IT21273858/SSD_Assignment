@@ -97,7 +97,7 @@ const profiler = await ProfileModel.find()
       return res.status(404).json({ message: 'Profile not found' });
     }
 
-    console.log("Profile data found:", profiler);
+    console.log("Profile data found:", userdetails);
 
     // Return the profile data directly
     return res.status(200).json({
@@ -129,15 +129,30 @@ export const getProfilesBySearch = async (req, res) => {
 
 
 export const updateProfile = async (req, res) => {
-  const { id: _id } = req.params
-  const profile = req.body
+  const { id: _id } = req.params;
+  const profile = req.body;
 
-  if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No client with that id')
+  // Validate the ObjectId
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send('No profile with that id');
+  }
 
-  const updatedProfile = await ProfileModel.findByIdAndUpdate(_id, {...profile, _id}, { new: true})
+  try {
+    // Attempt to update the profile
+    const updatedProfile = await ProfileModel.findByIdAndUpdate(_id, { ...profile, _id }, { new: true });
 
-  res.json(updatedProfile)
-}
+    // Check if the profile was found and updated
+    if (!updatedProfile) {
+      return res.status(404).send('No profile found to update');
+    }
+
+    // Send the updated profile as response
+    res.json(updatedProfile);
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(409).json({ message: error.message });
+  }
+};
 
 
   export const deleteProfile = async (req, res) => {

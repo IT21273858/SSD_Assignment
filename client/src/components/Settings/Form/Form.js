@@ -41,10 +41,11 @@ const Settings = () => {
 
 
   useEffect(() => {
-    if(switchEdit === 1) {
-      setForm(profiles)
+    if(switchEdit === 1 && profiles) {
+      setForm({ ...profiles });
     }
-  },[switchEdit])
+  }, [switchEdit, profiles]);
+
 
   useEffect(() => {
     

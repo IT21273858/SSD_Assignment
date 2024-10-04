@@ -14,6 +14,7 @@ export const getProfile = (id) => async (dispatch) => {
     console.log(error.response);
   } };
 
+  
 export const getProfiles = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING })
@@ -73,17 +74,14 @@ export const createProfile = (profile, history) => async (dispatch) => {
 
 export const updateProfile = (id, form, openSnackbar) => async (dispatch) => {
   try {
-    console.log("Income to update profile");
-    
+    console.log("Income to update profile", id, form); // Add ID and form data to log
     const { data } = await api.updateProfile(id, form);
-
     dispatch({ type: UPDATE_PROFILE, payload: data });
-    openSnackbar("Profile updated successfully")
+    openSnackbar("Profile updated successfully");
   } catch (error) {
-    console.log(error);
+    console.error('Error updating profile:', error); // Log error for debugging
   }
 };
-
 
 export const deleteProfile = (id) => async (dispatch) => {
   try {
