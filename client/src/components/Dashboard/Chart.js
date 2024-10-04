@@ -30,12 +30,24 @@ function Chart({ paymentHistory }) {
       curve: "smooth",
     },
     xaxis: {
-      type: "datetime",
-      categories: paymentDates, // Use ISO formatted dates
+      type: "category",
+      categories: paymentDates.map((date) => {
+        return new Date(date).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+        });
+      }),
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => {
+          return `${value / 1000}k`;
+        },
+      },
     },
     tooltip: {
       x: {
-        format: "dd/MM/yy", // This can remain as is for tooltip formatting
+        format: "dd MMM", // Updated tooltip format
       },
     },
   };

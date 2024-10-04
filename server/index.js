@@ -25,7 +25,7 @@ app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 // CORS configuration with restricted origins
-const corsOptions = {
+const corsOptions = { 
     origin: ['http://localhost:3000', 'https://another-trusted-site.com'],
     methods: ['GET', 'POST','PATCH' ,'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
